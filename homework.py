@@ -6,7 +6,7 @@ from typing import Union
 class InfoMessage:
     """Информационное сообщение о тренировке."""
     def __init__(self,
-                 training_type: Union[Running, SportsWalking, Swimming],
+                 training_type: Training,
                  duration: float,
                  distance: float,
                  speed: float,
@@ -147,7 +147,7 @@ def main(training: Training) -> None:
 
 
 if __name__ == '__main__':
-    packages: dict[str, list[int]] = [
+    packages: list[tuple[str, list[int]]] = [
         ('SWM', [720, 1, 80, 25, 40]),
         ('RUN', [15000, 1, 75]),
         ('WLK', [9000, 1, 75, 180]),
