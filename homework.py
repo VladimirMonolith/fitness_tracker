@@ -8,7 +8,7 @@ from typing import Type, Union
 class InfoMessage:
     """Информационное сообщение о тренировке."""
     training_type: str
-    duration_hour: float
+    duration: float
     distance_km: float
     speed_km_hour: float
     calories_kilocal: float
@@ -17,7 +17,7 @@ class InfoMessage:
         """Выводим информацию о тренировке."""
         values: dict[str, Union[str, float]] = asdict(self)
         return (f'Тип тренировки: {values["training_type"]}; '
-                f'Длительность: {values["duration_hour"]:.3f} ч.; '
+                f'Длительность: {values["duration"]:.3f} ч.; '
                 f'Дистанция: {values["distance_km"]:.3f} км; '
                 f'Ср. скорость: {values["speed_km_hour"]:.3f} км/ч; '
                 f'Потрачено ккал: {values["calories_kilocal"]:.3f}.')
