@@ -9,18 +9,18 @@ class InfoMessage:
     """Информационное сообщение о тренировке."""
     training_type: str
     duration: float
-    distance_km: float
-    speed_km_hour: float
-    calories_kilocal: float
+    distance: float
+    speed: float
+    calories: float
 
     def get_message(self) -> str:
         """Выводим информацию о тренировке."""
         values: dict[str, Union[str, float]] = asdict(self)
         return (f'Тип тренировки: {values["training_type"]}; '
                 f'Длительность: {values["duration"]:.3f} ч.; '
-                f'Дистанция: {values["distance_km"]:.3f} км; '
-                f'Ср. скорость: {values["speed_km_hour"]:.3f} км/ч; '
-                f'Потрачено ккал: {values["calories_kilocal"]:.3f}.')
+                f'Дистанция: {values["distance"]:.3f} км; '
+                f'Ср. скорость: {values["speed"]:.3f} км/ч; '
+                f'Потрачено ккал: {values["calories"]:.3f}.')
 
 
 class Training:
