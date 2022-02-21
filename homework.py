@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Type, Union
+from typing import Type
 
 
 @dataclass
@@ -12,15 +12,15 @@ class InfoMessage:
     distance: float
     speed: float
     calories: float
+    message: str = ('Тип тренировки: {training_type}; '
+                    'Длительность: {duration:.3f} ч.; '
+                    'Дистанция: {distance:.3f} км; '
+                    'Ср. скорость: {speed:.3f} км/ч; '
+                    'Потрачено ккал: {calories:.3f}.')
 
     def get_message(self) -> str:
         """Выводим информацию о тренировке."""
-        values: dict[str, Union[str, float]] = asdict(self)
-        return (f'Тип тренировки: {values["training_type"]}; '
-                f'Длительность: {values["duration"]:.3f} ч.; '
-                f'Дистанция: {values["distance"]:.3f} км; '
-                f'Ср. скорость: {values["speed"]:.3f} км/ч; '
-                f'Потрачено ккал: {values["calories"]:.3f}.')
+        return self.message.format(**asdict(self))
 
 
 class Training:
@@ -125,10 +125,9 @@ def read_package(workout_type: str, data: list[int]) -> Training:
         'WLK': SportsWalking
     }
 
-    if workout_type in training_data:
-        return training_data[workout_type](*data)
-    else:
-        raise KeyError('Передан неверный идентификатор тренировки')
+    if workout_type not in training_data:
+        raise ValueError('Передан неверный идентификатор тренировки.')
+    return training_data[workout_type](*data)
 
 
 def main(training: Training) -> None:
